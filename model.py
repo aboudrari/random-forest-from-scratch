@@ -47,9 +47,9 @@ def best_split(features, labels, feature_indices):
     # TODO: search feature_indices for the (feature, threshold) that best improves purity.
     best = {'feature_index': None, 'threshold': None, 'score': 0.0}
 
-    for fi in feature_indices:
+    for fi in feature_indices:  
         U = np.unique(features[:, fi]) # columns 
-        thresholds = (U[:1] + U[1:]) / 2 # midpoints 
+        thresholds = (U[:-1] + U[1:]) / 2 # midpoints 
         for t in thresholds :
             lf,ll,rf,rl = split_dataset(features, labels, fi, t)
             if len(ll) == 0 or len(rl) == 0: continue
