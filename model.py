@@ -48,13 +48,13 @@ def best_split(features, labels, feature_indices):
     best = {'feature_index': None, 'threshold': None, 'score': 0.0}
 
     for fi in feature_indices:  
-        U = np.unique(features[:, fi]) # columns 
+        U = np.unique(features[:, fi]) # unique values 
         thresholds = (U[:-1] + U[1:]) / 2 # midpoints 
         for t in thresholds :
             lf,ll,rf,rl = split_dataset(features, labels, fi, t)
             if len(ll) == 0 or len(rl) == 0: continue
             S = split_score(labels, ll, rl)
-            if S >= best["score"]:
+            if S > best["score"]:
                 best['feature_index'] = fi
                 best['threshold'] = t
                 best['score'] = S
