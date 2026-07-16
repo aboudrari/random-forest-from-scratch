@@ -22,11 +22,12 @@ import numpy as np
 
 def split_dataset(features, labels, feature_index, threshold):
     # TODO: partition rows into left (feature <= threshold) and right (feature > threshold)
-    col   = features[:, feature_index] 
     mask   = features[:, feature_index] <= threshold  # ['True','False', ...]
-    true_rows = features[mask] 
-    false_rows = features[~mask]
-    return (features[mask] , labels[mask], features[~mask], labels[~mask])
+    left_features = features[mask]
+    left_labels = labels[mask]
+    right_features = features[~mask]
+    right_labels = labels[~mask]
+    return (left_features , left_labels,right_features, right_labels)
 
 # Step 3 - split_score (not yet solved)
 # TODO: implement
