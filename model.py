@@ -85,7 +85,7 @@ def leaf_prediction(labels):
     # TODO: choose a single class label to output for a leaf given the labels that reached it
     labels = np.array(labels)
     values, counts = np.unique(labels, return_counts = True)
-    x = np.argmax(counts)
+    x = np.argmax(counts) # index of the large number
     return int(values[x])
 
 # Step 7 - build_tree (not yet solved)
