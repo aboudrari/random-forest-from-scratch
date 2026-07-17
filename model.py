@@ -88,8 +88,23 @@ def leaf_prediction(labels):
     x = np.argmax(counts) # index of the large number
     return int(values[x])
 
-# Step 7 - build_tree (not yet solved)
-# TODO: implement
+# Step 7 - build_tree
+def build_tree(features, labels, max_depth=10, min_samples_split=2, feature_subset=None, depth=0):
+    
+    if should_stop(labels, depth, max_depth, min_samples_split):
+        return {'leaf': True, 'prediction': leaf_prediction(labels)}
+
+    if feature_subset is None:
+        candidates = range(features.shape[1])
+    else:
+        candidates = list(feature_subset)
+
+    best = best_split(features, labels, candidates)
+    if best['feature_index'] is None:
+        return {'leaf': True, 'prediction': leaf_prediction(labels)}
+
+    lf, ll, rf, rl = split_dataset(features, labels, best['feature_index'], best['threshold'])
+    return  {'leaf': False, 'feature_index': best['feature_index'], 'threshold': best['threshold'], 'left': build_tree(lf, ll, max_depth, min_samples_split, feature_subset, depth + 1), 'right': build_tree(rf, rl, max_depth, min_samples_split, feature_subset, depth + 1)}
 
 # Step 8 - predict_example_tree (not yet solved)
 # TODO: implement
