@@ -106,8 +106,18 @@ def build_tree(features, labels, max_depth=10, min_samples_split=2, feature_subs
     lf, ll, rf, rl = split_dataset(features, labels, best['feature_index'], best['threshold'])
     return  {'leaf': False, 'feature_index': best['feature_index'], 'threshold': best['threshold'], 'left': build_tree(lf, ll, max_depth, min_samples_split, feature_subset, depth + 1), 'right': build_tree(rf, rl, max_depth, min_samples_split, feature_subset, depth + 1)}
 
-# Step 8 - predict_example_tree (not yet solved)
-# TODO: implement
+# Step 8 - predict_example_tree
+def predict_example_tree(tree, example):
+    # TODO: walk the example down the fitted tree until you reach a leaf, then return its prediction.
+    if tree['leaf'] == True :
+        return tree['prediction']
+    else :
+        feature_index = tree['feature_index']
+        threshold = tree['threshold']
+        if example[feature_index]<= threshold:
+            return predict_example_tree(tree['left'], example)
+        else :
+            return predict_example_tree(tree['right'], example)
 
 # Step 9 - predict_tree (not yet solved)
 # TODO: implement
