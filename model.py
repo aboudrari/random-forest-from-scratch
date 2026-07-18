@@ -181,8 +181,14 @@ def combine_predictions(tree_predictions):
         votes.append(majority_class)
     return np.array(votes)
 
-# Step 14 - predict_forest (not yet solved)
-# TODO: implement
+# Step 14 - predict_forest
+def predict_forest(forest, features):
+    all_predictions = []
+    for entry in forest:
+        preds = predict_tree(entry['tree'], features)
+        all_predictions.append(preds)
+    stacked = np.array(all_predictions)
+    return combine_predictions(stacked)
 
 # Step 15 - accuracy (not yet solved)
 # TODO: implement
