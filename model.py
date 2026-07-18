@@ -162,7 +162,8 @@ def train_forest(features, labels, num_trees=10, max_depth=10, min_samples_split
     for i in range(num_trees):
         Xs, ys = bootstrap_sample(features, labels, rng)
         feature_indices = feature_subset(d, num_features_per_split, rng)
-        tree = build_tree(Xs[:, feature_indices], ys, max_depth=max_depth, min_samples_split=min_samples_split)
+        tree = build_tree(Xs, ys, max_depth=max_depth, min_samples_split=min_samples_split,
+                           feature_subset=feature_indices)
         forest.append({'tree': tree, 'feature_indices': feature_indices})
 
     return forest
