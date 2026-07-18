@@ -190,6 +190,7 @@ def predict_forest(forest, features):
     stacked = np.array(all_predictions)
     return combine_predictions(stacked)
 
-# Step 15 - accuracy (not yet solved)
-# TODO: implement
+# Step 15 - accuracy
+def accuracy(predictions, labels):
+    return float(np.mean(predictions == labels))
 
